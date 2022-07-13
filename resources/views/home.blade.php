@@ -7,7 +7,12 @@
     <main>
         <ul>
             @foreach ($arrComics as $comics)
-                <li>{{$comics['title']}}</li>
+                <li>
+                    <img src="{{$comics['thumb']}}">
+                    <div>
+                        {{$comics['title']}}
+                    </div>
+                </li>
             @endforeach
         </ul>
     </main>
