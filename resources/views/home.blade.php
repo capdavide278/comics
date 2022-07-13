@@ -1,17 +1,19 @@
 @extends('templates.base')
 
-@section('pageTitle', 'Fumetti - Home')
+@section('pageTitle', 'Fumetti - Homepage')
 
 @section('pageMain')
 
     <main>
         <ul>
-            @foreach ($arrComics as $comics)
+            @foreach ($comics as $comic)
                 <li>
-                    <img src="{{$comics['thumb']}}">
+                    <a href="{{ route('prodotto', ['series' => $comic['series']]) }}">
+                    <img src="{{$comic['thumb']}}">
                     <div>
-                        {{$comics['title']}}
+                        {{$comic['title']}}
                     </div>
+                    </a>
                 </li>
             @endforeach
         </ul>

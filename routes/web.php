@@ -14,8 +14,31 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    $arrComics = config('comics');
-    return view('home', [
-        'arrComics' => $arrComics,
+    $comics = config('comics');
+    return view('home',[
+        'comics' => $comics,
     ]);
 })->name('home');
+
+Route::get('/home/{series}', function ($series) {
+    $comics = null;
+    foreach (config('comics') as $value){
+        if ($value['series'] == $series){
+            $comics = $value;
+            break;
+        }
+    }
+
+    if ($comics) {
+        return view('prodotto',[
+            'pageTitle' => 'Fumetti - Homepage',
+            'comics'    => $comics,
+        ]);
+    } else {
+        abort(404);
+    }
+})->name('home');
+
+Route::get('/prodotto', function(){
+    return view('prodotto');
+})->name('prodotto');
